@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Blog;
+use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Blog|null find($id, $lockMode = null, $lockVersion = null)
- * @method Blog|null findOneBy(array $criteria, array $orderBy = null)
- * @method Blog[]    findAll()
- * @method Blog[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Post|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Post|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Post[]    findAll()
+ * @method Post[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BlogRepository extends ServiceEntityRepository
+class PostRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Blog::class);
+        parent::__construct($registry, Post::class);
     }
 
     // /**
-    //  * @return Blog[] Returns an array of Blog objects
+    //  * @return Post[] Returns an array of Post objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class BlogRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Blog
+    public function findOneBySomeField($value): ?Post
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.exampleField = :val')

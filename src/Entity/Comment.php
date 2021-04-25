@@ -38,10 +38,10 @@ class Comment
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Blog::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $blog;
+    private $post;
 
     public function getId(): ?int
     {
@@ -96,14 +96,14 @@ class Comment
         return $this;
     }
 
-    public function getBlog(): ?Blog
+    public function getPost(): ?Post
     {
-        return $this->blog;
+        return $this->post;
     }
 
-    public function setBlog(?Blog $blog): self
+    public function setPost(?Post $post): self
     {
-        $this->blog = $blog;
+        $this->post = $post;
 
         return $this;
     }
