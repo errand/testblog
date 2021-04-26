@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\BlogRepository;
+use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=BlogRepository::class)
+ * @ORM\Entity(repositoryClass=PostRepository::class)
  */
-class Blog
+class Post
 {
     /**
      * @ORM\Id
@@ -40,7 +40,7 @@ class Blog
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="blog", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
      */
     private $comments;
 
@@ -119,7 +119,7 @@ class Blog
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setBlog($this);
+            $comment->setPost($this);
         }
 
         return $this;
@@ -129,8 +129,8 @@ class Blog
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getBlog() === $this) {
-                $comment->setBlog(null);
+            if ($comment->getPost() === $this) {
+                $comment->setPost(null);
             }
         }
 
