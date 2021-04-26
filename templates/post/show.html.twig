@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ post }}
+{% endblock %}
+
+{% block body %}
+	<article class="article article-{{ post.id }} pt-4">
+
+		<h2>{{ post }}</h2>
+
+		{% if comments|length > 0 %}
+			{% for comment in comments %}
+				<h4>{{ comment.author }}</h4>
+				<small>
+					{{ comment.createdAt|format_datetime('medium', 'short') }}
+				</small>
+
+				<p>{{ comment.text }}</p>
+			{% endfor %}
+		{% else %}
+			<div>No comments have been posted yet for this post.</div>
+		{% endif %}
+
+	</article>
+{% endblock %}
