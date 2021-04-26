@@ -7,17 +7,26 @@ use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 class PostController extends AbstractController
 {
+
+    private $twig;
+
+    public function __construct(Environment $twig)
+    {
+        $this->twig = $twig;
+    }
+
     /**
      * @Route("/", name="homepage")
      */
-    public function index(Environment $twig, PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository): Response
     {
-        return new Response($twig->render('post/index.html.twig', [
+        return new Response($this->twig->render('post/index.html.twig', [
             'posts' => $postRepository->findAll(),
             ]));
     }
@@ -25,11 +34,16 @@ class PostController extends AbstractController
     /**
      * @Route("/post/{id}", name="post")
      */
-    public function show(Environment $twig, Post $post, CommentRepository $commentRepository): Response
+    public function show(Request $request, Post $post, CommentRepository $commentRepository): Response
     {
-        return new Response($twig->render('post/show.html.twig', [
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $commentRepository->getCommentPaginator($post, $offset);
+
+        return new Response($this->twig->render('post/show.html.twig', [
             'post' => $post,
-            'comments' => $commentRepository->findBy(['post' => $post], ['createdAt' => 'DESC']),
+            'comments' => $paginator,
+            'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
         ]));
     }
 }

@@ -5,22 +5,59 @@
 {% endblock %}
 
 {% block body %}
-	<article class="article article-{{ post.id }} pt-4">
+	<article class="post post-{{ post.id }} pt-4">
+		<header>
+			<h1 class="title">{{ post }}</h1>
 
-		<h2>{{ post }}</h2>
+			<div class="post__meta d-flex">
+				<div class="post__time">Posted on
+					<time datetime="{{ post.createdAt|format_datetime('full', 'full') }}">{{ post.createdAt|format_datetime('medium', 'short') }}</time>.
+				</div>
+				{% if comments|length > 0 %}
+					<div class="post__comments ps-4">
+						<a href="#comments">{{ comments|length }}
+							comments</a>
+					</div>
 
-		{% if comments|length > 0 %}
-			{% for comment in comments %}
-				<h4>{{ comment.author }}</h4>
-				<small>
-					{{ comment.createdAt|format_datetime('medium', 'short') }}
-				</small>
+				{% endif %}
 
-				<p>{{ comment.text }}</p>
-			{% endfor %}
-		{% else %}
-			<div>No comments have been posted yet for this post.</div>
-		{% endif %}
+
+			</div>
+		</header>
+
+
+		<section id="comments" class="comments pt-4">
+			{% if comments|length > 0 %}
+				{% for comment in comments %}
+					<h4>{{ comment.author }}</h4>
+					<small>
+						{{ comment.createdAt|format_datetime('medium', 'short') }}
+					</small>
+
+					<p>{{ comment.text }}</p>
+				{% endfor %}
+
+				{% if previous >= 0 or next < comments|length %}
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							{% if previous >= 0 %}
+								<li class="page-item">
+									<a class="page-link" href="{{ path('post', { id: post.id, offset: previous }) }}">Previous</a>
+								</li>
+							{% endif %}
+							{% if next < comments|length %}
+								<li class="page-item">
+									<a class="page-link" href="{{ path('post', { id: post.id, offset: next }) }}">Next</a>
+								</li>
+							{% endif %}
+						</ul>
+					</nav>
+				{% endif %}
+			{% else %}
+				<div>No comments have been posted yet for this post.</div>
+			{% endif %}
+		</section>
+
 
 	</article>
 {% endblock %}
