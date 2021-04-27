@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Post
 {
@@ -110,6 +111,14 @@ class Post
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
     }
 
     /**

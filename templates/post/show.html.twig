@@ -56,8 +56,11 @@
 			{% else %}
 				<div>No comments have been posted yet for this post.</div>
 			{% endif %}
-		</section>
+			<h4>Add comment</h4>
+			{{ form(comment_form) }}
+
+			</section>
 
 
-	</article>
-{% endblock %}
+		</article>
+	{% endblock %}
