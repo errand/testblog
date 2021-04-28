@@ -2,12 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ * @ApiResource
+ *
+ * @ApiFilter(SearchFilter::class, properties={"post": "exact"})
  */
 class Comment
 {
@@ -16,18 +24,21 @@ class Comment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(['comment:list', 'comment:item'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     #[Assert\NotBlank]
+    #[Groups(['comment:list', 'comment:item'])]
     private $author;
 
     /**
      * @ORM\Column(type="text")
      */
     #[Assert\NotBlank]
+    #[Groups(['comment:list', 'comment:item'])]
     private $text;
 
     /**
@@ -35,17 +46,20 @@ class Comment
      */
     #[Assert\NotBlank]
     #[Assert\Email]
+    #[Groups(['comment:list', 'comment:item'])]
     private $email;
 
     /**
      * @ORM\Column(type="datetime")
      */
+    #[Groups(['comment:list', 'comment:item'])]
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
+    #[Groups(['comment:list', 'comment:item'])]
     private $post;
 
 	public function __toString(): string

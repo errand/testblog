@@ -19,8 +19,6 @@ class CommentFormType extends AbstractType
             ])
             ->add('text')
             ->add('email', EmailType::class)
-            ->add('createdAt')
-            ->add('post')
             ->add('submit', SubmitType::class)
         ;
     }

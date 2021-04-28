@@ -2,15 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ *
+ * @ApiResource
  */
+
 class Post
 {
     /**
@@ -18,26 +23,31 @@ class Post
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+		#[Groups(['post:list', 'post:item'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+		#[Groups(['post:list', 'post:item'])]
     private $title;
 
     /**
      * @ORM\Column(type="string", length=2000, nullable=true)
      */
+		#[Groups(['post:list', 'post:item'])]
     private $description;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+		#[Groups(['post:list', 'post:item'])]
     private $body;
 
     /**
      * @ORM\Column(type="datetime")
      */
+		#[Groups(['post:list', 'post:item'])]
     private $createdAt;
 
     /**
