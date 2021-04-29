@@ -18,12 +18,24 @@
 						<a href="#comments">{{ comments|length }}
 							comments</a>
 					</div>
-
 				{% endif %}
-
 
 			</div>
 		</header>
+
+
+    {% if post.description %}
+      <div class="post-description py-4">
+        {{ post.description }}
+      </div>
+    {% endif %}
+
+    {% if post.body %}
+      <div class="post-body pb-4">
+        {{ post.body }}
+      </div>
+    {% endif %}
+
 
 
 		<section id="comments" class="comments pt-4">

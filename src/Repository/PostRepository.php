@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,10 +15,25 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
+
+		public const PAGINATOR_PER_PAGE = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
     }
+
+		public function getPostPaginator(Post $post, int $offset): Paginator
+		{
+			$query = $this->createQueryBuilder()
+			              ->orderBy('createdAt', 'DESC')
+			              ->setMaxResults(self::PAGINATOR_PER_PAGE)
+			              ->setFirstResult($offset)
+			              ->getQuery()
+			;
+
+			return new Paginator($query);
+		}
 
     // /**
     //  * @return Post[] Returns an array of Post objects

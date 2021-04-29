@@ -14,6 +14,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.8",
         "easycorp/easyadmin-bundle": "^3",
+        "fakerphp/faker": "^1.14",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",
@@ -81,6 +82,7 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/debug-bundle": "^5.2",
         "symfony/maker-bundle": "^1.30",
         "symfony/stopwatch": "^5.2",
