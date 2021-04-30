@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search results{% endblock %}
+
+{% block body %}
+  <h1 class="mb-6">Search results for: "{{ query|highlight(query) }}"</h1>
+  {% if query %}
+  {% if posts %}
+    <div class="search_results">
+  {% for post in posts %}
+    <div class="search-result mb-4 border-bottom border-gray">
+      <h2 class="h4"><a href="{{ path('post', { id: post.id }) }}">{{ post.title | highlight(query) }}</a></h2>
+      <p class="search-result__body pb-3">
+        {{ post.body | slice(0, 255) | highlight(query)  }} ...
+      </p>
+    </div>
+  {% endfor %}
+    </div>
+  {% else %}
+    <div>No results found for your query</div>
+    </div>
+  {% endif %}
+  {% else %}
+    <div>Your query is empty</div>
+  {% endif %}
+{% endblock %}
