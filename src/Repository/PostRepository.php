@@ -16,34 +16,20 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class PostRepository extends ServiceEntityRepository
 {
 
-		public const PAGINATOR_PER_PAGE = 10;
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
     }
 
-		public function getPostPaginator(Post $post, int $offset): Paginator
+		public function searchByQuery(string $query)
 		{
-			$query = $this->createQueryBuilder()
-			              ->orderBy('createdAt', 'DESC')
-			              ->setMaxResults(self::PAGINATOR_PER_PAGE)
-			              ->setFirstResult($offset)
-			              ->getQuery()
-			;
-
-			return new Paginator($query);
+			return $this->createQueryBuilder('p')
+			            ->where('p.title LIKE :query')
+			            ->where('p.body LIKE :query')
+			            ->setParameter('query', '%'. $query. '%')
+			            ->getQuery()
+			            ->getResult();
 		}
-
-	public function searchByQuery(string $query)
-	{
-		return $this->createQueryBuilder('p')
-		            ->where('p.title LIKE :query')
-		            ->where('p.body LIKE :query')
-		            ->setParameter('query', '%'. $query. '%')
-		            ->getQuery()
-		            ->getResult();
-	}
 
     // /**
     //  * @return Post[] Returns an array of Post objects
