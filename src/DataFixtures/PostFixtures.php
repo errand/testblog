@@ -22,6 +22,7 @@ class PostFixtures extends Fixture
 		    $post->setCreatedAtValue($generator->dateTime);
 		    $post->setPrivate($generator->boolean());
 		    $manager->persist($post);
+
 	    }
 
         $manager->flush();
