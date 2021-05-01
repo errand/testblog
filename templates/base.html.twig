@@ -1,113 +1,131 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>{% block title %}Welcome!{% endblock %}</title>
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
 
-  {% block stylesheets %}
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i&display=swap" rel="stylesheet" />
-    {{ encore_entry_link_tags('app') }}
-  {% endblock %}
-</head>
-<body>
-<header class="header">
-  <h1 class="sr-only">
-    Test blog
-  </h1>
-  <nav class="navbar navbar-expand-xl navbar-light bg-light">
-    <div class="container mt-4 mb-3">
-      <a class="navbar-brand mr-4 pr-2 flex-grow-1" href="{{ path('homepage') }}">
-        &#128217; Test blog
-      </a>
-
-      <form class="form-inline my-2 my-lg-0 pull-right" action="{{ path('search') }}" method="get">
-        <input class="form-control mr-sm-2" id="search" type="search" aria-label="Search" name="q">
-        <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
-      </form>
-      <ul class="nav position-absolute" id="entitiesNav">
-      </ul>
-
-      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Show/Hide navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="header-menu">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mr-3">
-            <a class="nav-link" href="{{ path('admin') }}">
-              Admin
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
-
-<main role="main" class="container mt-5">
-  {% block body %}{% endblock %}
-</main>
-
-<footer class="mt-7 px-3 py-5 text-center text-muted">
-  <p>
-    Test blog
-  </p>
-  <p>
-    <a href="#" class="text-white">Back to top</a>
-  </p>
-</footer>
-
-{% block javascripts %}
-  {{ encore_entry_script_tags('app') }}
-{% endblock %}
+		{% block stylesheets %}
+			<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i&display=swap" rel="stylesheet"/>
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<header class="header">
+			<h1 class="sr-only">
+				Test blog
+			</h1>
+			<nav class="navbar navbar-expand-xl navbar-light bg-light">
+				<div class="container mt-4 mb-3">
+					<div class=" flex-grow-1">
+						<a class="navbar-brand mr-4 pr-2" href="{{ path('homepage') }}">
+							&#128217; Test blog
+						</a>
+					</div>
 
 
-<!-- jQuery is necessary -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+					<form class="form-inline my-2 my-lg-0 pull-right" action="{{ path('search') }}" method="get">
+						<input class="form-control mr-sm-2" id="search" type="search" aria-label="Search" name="q">
+						<button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+						<ul class="search-suggestions" id="entitiesNav"></ul>
+					</form>
 
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        var searchRequest = null;
-        $("#search").keyup(function() {
-            var minlength = 3;
-            var that = this;
-            var value = $(this).val();
-            var entitySelector = $("#entitiesNav").html('');
-            if (value.length >= minlength ) {
-                if (searchRequest != null)
-                    searchRequest.abort();
-                    searchRequest = $.ajax({
-                    type: "GET",
-                    url: "{{ path('ajax_search') }}",
-                    data: {
-                        'q' : value
-                    },
-                    dataType: "text",
-                    success: function(msg){
 
-                        console.log(msg);
-                        //we need to check if the value is the same
-                        if (value==$(that).val()) {
-                            var result = JSON.parse(msg);
-                            $.each(result, function(key, arr) {
-                                $.each(arr, function(id, value) {
-                                    if (key == 'posts') {
-                                        if (id != 'error') {
-                                            entitySelector.append('<li><a href="/post/'+id+'">'+value+'</a></li>');
-                                        } else {
-                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
-                                        }
-                                    }
-                                });
-                            });
-                        }
-                    }
-                });
-            }
-        });
-    });
-</script>
-</body>
-</html>
+					<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Show/Hide navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="header-menu">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item mr-3">
+								<a class="nav-link" href="{{ path('admin') }}">
+									Admin
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<main role="main" class="container mt-5"> {% block body %}{% endblock %}
+			</main>
+
+			<footer class="mt-7 px-3 py-5 text-center text-muted">
+				<p>
+					Test blog
+				</p>
+				<p>
+					<a href="#" class="text-white">Back to top</a>
+				</p>
+			</footer>
+
+			{% block javascripts %}
+				{{ encore_entry_script_tags('app') }}
+			{% endblock %}
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+			<script>
+				jQuery( document ).click( function () {
+if ( $( "#search" ).is( ":empty" ) ) {
+$( "#entitiesNav" ).html( '' );
+$( '.search-suggestions' ).removeClass( 'active' );
+}
+} );
+
+
+jQuery( document ).ready( function () {
+
+var searchRequest = null;
+$( "#search" ).keyup( function () {
+var minlength = 3;
+var that = this;
+var value = $( this ).val();
+var entitySelector = $( "#entitiesNav" ).html( '' );
+if ( value.length >= minlength ) {
+if ( searchRequest != null ) 
+searchRequest.abort();
+
+
+
+searchRequest = $.ajax( {
+type: "GET",
+url: "{{ path('ajax_search') }}",
+data: {
+'q': value
+},
+dataType: "text",
+success: function ( msg ) {
+
+$( '.search-suggestions' ).addClass( 'active' );
+// we need to check if the value is the same
+if ( value == $( that ).val() ) {
+var result = JSON.parse( msg );
+$.each( result, function ( key, arr ) {
+$.each( arr, function ( id, value ) {
+if ( key == 'posts' ) {
+if ( id != 'error' ) {
+entitySelector.append( '<li><a href="/post/' + id + '">' + value + '</a></li>' );
+} else {
+entitySelector.append( '<li class="errorLi">' + value + '</li>' );
+}
+}
+} );
+} );
+}
+}
+} );
+} else {
+$( '.search-suggestions' ).removeClass( 'active' );
+
+}
+} );
+} );
+			</script>
+		</body>
+	</html>

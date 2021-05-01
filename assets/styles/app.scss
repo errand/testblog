@@ -27,6 +27,17 @@ main {
     transition: all .15s;
 }
 
+.search-suggestions {
+    position: absolute;
+    overflow-y: auto;
+
+    &.active {        
+        height: 200px;
+        background: white;
+        top: 80px;
+    }
+}
+
 .lift {
     transition: box-shadow .25s ease,transform .25s ease;
 
