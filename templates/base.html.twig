@@ -28,12 +28,14 @@
 					</div>
 
 
-					<form class="form-inline my-2 my-lg-0 pull-right" action="{{ path('search') }}" method="get">
-						<input class="form-control mr-sm-2" id="search" type="search" aria-label="Search" name="q">
-						<button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
-						<ul class="search-suggestions" id="entitiesNav"></ul>
-					</form>
-
+                    <form class="my-2 my-lg-0">
+                        <div class="input-group" {{ stimulus_controller('search-preview', {
+                            url: path('search')
+                        }) }}>
+                            <input class="form-control" data-action="search-preview#onSearchInput">
+                            <div class="search-preview" data-search-preview-target="result"></div>
+                        </div>
+                    </form>
 
 					<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Show/Hide navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -67,65 +69,6 @@
 			{% block javascripts %}
 				{{ encore_entry_script_tags('app') }}
 			{% endblock %}
-			<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-
-			<script>
-				jQuery( document ).click( function () {
-if ( $( "#search" ).is( ":empty" ) ) {
-$( "#entitiesNav" ).html( '' );
-$( '.search-suggestions' ).removeClass( 'active' );
-}
-} );
-
-
-jQuery( document ).ready( function () {
-
-var searchRequest = null;
-$( "#search" ).keyup( function () {
-var minlength = 3;
-var that = this;
-var value = $( this ).val();
-var entitySelector = $( "#entitiesNav" ).html( '' );
-if ( value.length >= minlength ) {
-if ( searchRequest != null ) 
-searchRequest.abort();
-
-
-
-searchRequest = $.ajax( {
-type: "GET",
-url: "{{ path('ajax_search') }}",
-data: {
-'q': value
-},
-dataType: "text",
-success: function ( msg ) {
-
-$( '.search-suggestions' ).addClass( 'active' );
-// we need to check if the value is the same
-if ( value == $( that ).val() ) {
-var result = JSON.parse( msg );
-$.each( result, function ( key, arr ) {
-$.each( arr, function ( id, value ) {
-if ( key == 'posts' ) {
-if ( id != 'error' ) {
-entitySelector.append( '<li><a href="/post/' + id + '">' + value + '</a></li>' );
-} else {
-entitySelector.append( '<li class="errorLi">' + value + '</li>' );
-}
-}
-} );
-} );
-}
-}
-} );
-} else {
-$( '.search-suggestions' ).removeClass( 'active' );
-
-}
-} );
-} );
-			</script>
 		</body>
 	</html>

@@ -38,40 +38,43 @@
 
 
 
-		<section id="comments" class="comments pt-4">
-			{% if comments|length > 0 %}
-				{% for comment in comments %}
-					<h4>{{ comment.author }}</h4>
-					<small>
-						{{ comment.createdAt|format_datetime('medium', 'short') }}
-					</small>
+    <section id="comments" class="comments pt-4">
+        {% if comments|length > 0 %}
+            <h4 class="mb-3">Comments ({{ comments|length }})</h4>
+            {% for comment in comments %}
+                <div class="mb-4">
+                    <h4>{{ comment.author }}</h4>
+                    <small>
+                        {{ comment.createdAt|format_datetime('medium', 'short') }}
+                    </small>
 
-					<p>{{ comment.text }}</p>
-				{% endfor %}
+                    <p>{{ comment.text }}</p>
+                </div>
+            {% endfor %}
 
-				{% if previous >= 0 or next < comments|length %}
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							{% if previous >= 0 %}
-								<li class="page-item">
-									<a class="page-link" href="{{ path('post', { id: post.id, offset: previous }) }}">Previous</a>
-								</li>
-							{% endif %}
-							{% if next < comments|length %}
-								<li class="page-item">
-									<a class="page-link" href="{{ path('post', { id: post.id, offset: next }) }}">Next</a>
-								</li>
-							{% endif %}
-						</ul>
-					</nav>
-				{% endif %}
-			{% else %}
-				<div>No comments have been posted yet for this post.</div>
-			{% endif %}
-			<h4>Add comment</h4>
-			{{ form(comment_form) }}
+            {% if previous >= 0 or next < comments|length %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if previous >= 0 %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('post', { id: post.id, offset: previous }) }}">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% if next < comments|length %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('post', { id: post.id, offset: next }) }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        {% else %}
+            <div>Be first to comment.</div>
+        {% endif %}
+        <h4 class="mb-3">Add comment</h4>
+        {{ form(comment_form) }}
 
-			</section>
+        </section>
 
 
 		</article>

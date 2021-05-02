@@ -40,6 +40,7 @@ class PostRepository extends ServiceEntityRepository
 			            ->where('p.title LIKE :query')
 			            ->where('p.body LIKE :query')
 			            ->setParameter('query', '%'. $query. '%')
+			            ->orderBy('p.createdAt', 'ASC')
 			            ->getQuery()
 			            ->getResult();
 		}

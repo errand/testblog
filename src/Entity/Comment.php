@@ -63,9 +63,9 @@ class Comment
     private $post;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=false)
      */
-    private $hidden;
+    private $hidden = 0;
 
 	public function __toString(): string
              {
