@@ -72,6 +72,10 @@
             <div>Be first to comment.</div>
         {% endif %}
         <h4 class="mb-3">Add comment</h4>
+
+        <form {{ stimulus_controller('submit-confirm') }} data-action="submit-confirm#onSubmit">
+        </form>
+
         {{ form(comment_form) }}
 
         </section>
