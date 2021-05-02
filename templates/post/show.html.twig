@@ -24,66 +24,74 @@
 		</header>
 
 
-    {% if post.description %}
-      <div class="post-description py-4">
-        {{ post.description }}
-      </div>
-    {% endif %}
+		{% if post.description %}
+			<div class="post-description py-4">
+				{{ post.description }}
+			</div>
+		{% endif %}
 
-    {% if post.body %}
-      <div class="post-body pb-4">
-        {{ post.body }}
-      </div>
-    {% endif %}
+		{% if post.body %}
+			<div class="post-body pb-4">
+				{{ post.body }}
+			</div>
+		{% endif %}
 
 
+		<section id="comments" class="comments pt-4">
+			{% if comments|length > 0 %}
+				<h4 class="mb-3">Comments ({{ comments|length }})</h4>
+				{% for comment in comments %}
+					<div class="mb-4">
+						<h4>{{ comment.author }}</h4>
+						<small>
+							{{ comment.createdAt|format_datetime('medium', 'short') }}
+						</small>
 
-    <section id="comments" class="comments pt-4">
-        {% if comments|length > 0 %}
-            <h4 class="mb-3">Comments ({{ comments|length }})</h4>
-            {% for comment in comments %}
-                <div class="mb-4">
-                    <h4>{{ comment.author }}</h4>
-                    <small>
-                        {{ comment.createdAt|format_datetime('medium', 'short') }}
-                    </small>
+						<p>{{ comment.text }}</p>
+						{% if app.user %}
+							<div class="border-bottom border-primary">
+								<form class="form-inline" action="/comment/{{comment.id}}/delete" method="post">
+									<input type="hidden" name="referer" value="{{app.request.headers.get('referer')}}"/>
+									<button type="submit" class="btn btn-danger mb-2">Delete</button>
+								</form>
+								<form class="form-inline" action="/comment/{{comment.id}}/hide" method="post">
+									<input type="hidden" name="referer" value="{{app.request.headers.get('referer')}}"/>
+									<button type="submit" class="btn btn-warning mb-2">Hide</button>
 
-                    <p>{{ comment.text }}</p>
-                    {% if app.user %}
-                    <div class="border-bottom border-primary">
+								</form>
+							</div>
 
-                    </div>
-                    {% endif %}
-                </div>
-            {% endfor %}
 
-            {% if previous >= 0 or next < comments|length %}
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        {% if previous >= 0 %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ path('post', { id: post.id, offset: previous }) }}">Previous</a>
-                            </li>
-                        {% endif %}
-                        {% if next < comments|length %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ path('post', { id: post.id, offset: next }) }}">Next</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            {% endif %}
-        {% else %}
-            <div>Be first to comment.</div>
-        {% endif %}
-        <h4 class="mb-3">Add comment</h4>
+						{% endif %}
+					</div>
+				{% endfor %}
 
-        <form {{ stimulus_controller('submit-confirm') }} data-action="submit-confirm#onSubmit">
-        </form>
+				{% if previous >= 0 or next < comments|length %}
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							{% if previous >= 0 %}
+								<li class="page-item">
+									<a class="page-link" href="{{ path('post', { id: post.id, offset: previous }) }}">Previous</a>
+								</li>
+							{% endif %}
+							{% if next < comments|length %}
+								<li class="page-item">
+									<a class="page-link" href="{{ path('post', { id: post.id, offset: next }) }}">Next</a>
+								</li>
+							{% endif %}
+						</ul>
+					</nav>
+				{% endif %}
+			{% else %}
+				<div>Be first to comment.</div>
+			{% endif %}
+			<h4 class="mb-3">Add comment</h4>
 
-        {{ form(comment_form) }}
+			<form {{ stimulus_controller('submit-confirm') }} data-action="submit-confirm#onSubmit"></form>
 
-        </section>
+			{{ form(comment_form) }}
+
+			</section>
 
 
 		</article>

@@ -20,7 +20,6 @@ class HighlightExtention extends AbstractExtension
 		foreach($words as $word) {
 			$highlight[]= '<span class="bg-warning">'.$word.'</span>';
 		}
-		//return preg_replace($words,'<span class="highlighted">$0</span>',htmlentities($text));
 		return str_ireplace($words, $highlight, $text);
 	}
 
