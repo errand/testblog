@@ -6,15 +6,24 @@ use App\Entity\Admin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminFixtures extends Fixture
 {
+		private $encoder;
+
+		public function __construct(UserPasswordEncoderInterface $encoder)
+		{
+			$this->encoder = $encoder;
+		}
+
     public function load(ObjectManager $manager)
     {
 
 		    $admin = new Admin();
 		    $admin->setUsername('admin');
-		    $admin->setPassword('$argon2id$v=19$m=65536,t=4,p=1$5xx60DC+TK+jS6XgBGr75A$3jPgt81wMt/2pjXpPcKs/5vtYqPfmr4kiMLMJt3cf/0');
+	      $password = $this->encoder->encodePassword($admin, '123');
+	      $admin->setPassword($password);
 		    $admin->setRoles(array('ROLE_ADMIN'));
 		    $manager->persist($admin);
 

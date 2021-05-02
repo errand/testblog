@@ -62,10 +62,15 @@ class Comment
     #[Groups(['comment:list', 'comment:item'])]
     private $post;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $hidden;
+
 	public function __toString(): string
-    {
-        return (string) $this->getEmail();
-    }
+             {
+                 return (string) $this->getEmail();
+             }
 
     public function getId(): ?int
     {
@@ -136,6 +141,18 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getHidden(): ?bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(?bool $hidden): self
+    {
+        $this->hidden = $hidden;
 
         return $this;
     }

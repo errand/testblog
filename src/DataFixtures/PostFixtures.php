@@ -10,6 +10,8 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class PostFixtures extends Fixture
 {
+		public const POST_REFERENCE = 'post-reference';
+
     public function load(ObjectManager $manager)
     {
 	    $generator = Factory::create("et_EE");
@@ -23,6 +25,7 @@ class PostFixtures extends Fixture
 		    $post->setPrivate($generator->boolean());
 		    $manager->persist($post);
 
+		    //$this->addReference(self::POST_REFERENCE, $post);
 	    }
 
         $manager->flush();

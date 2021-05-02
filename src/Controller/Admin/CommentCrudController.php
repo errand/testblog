@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 
 class CommentCrudController extends AbstractCrudController
@@ -41,6 +42,7 @@ class CommentCrudController extends AbstractCrudController
 	    yield AssociationField::new('post');
 	    yield TextField::new('author');
 	    yield EmailField::new('email');
+	    yield BooleanField::new('hidden');
 	    yield TextareaField::new('text') ->hideOnIndex() ;
 
 			$createdAt = DateTimeField::new('createdAt')->setFormTypeOptions([
