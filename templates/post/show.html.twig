@@ -49,6 +49,11 @@
                     </small>
 
                     <p>{{ comment.text }}</p>
+                    {% if app.user %}
+                    <div class="border-bottom border-primary">
+
+                    </div>
+                    {% endif %}
                 </div>
             {% endfor %}
 
