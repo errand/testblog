@@ -1,8 +1,8 @@
 {% for post in posts %}
-    <div class="search-result mb-4 border-bottom border-gray">
+    <div class="search-result pt-4 mb-4 border-bottom border-gray">
         <h2 class="h4"><a href="{{ path('post', { id: post.id }) }}">{{ post.title | highlight(query) }}</a></h2>
         <p class="search-result__body pb-3">
-            {{ post.body | slice(0, 255) | highlight(query)  }} ...
+            {{ post.body | slice(0, 255) | similarity(query)  }} ...
         </p>
     </div>
 {% endfor %}

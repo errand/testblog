@@ -28,11 +28,12 @@
 					</div>
 
 
-                    <form class="my-2 my-lg-0">
+                    <form class="my-2 my-lg-0 form-inline" action="{{ path('search') }}" method="get">
                         <div class="input-group" {{ stimulus_controller('search-preview', {
                             url: path('search')
                         }) }}>
-                            <input class="form-control" data-action="search-preview#onSearchInput">
+                            <input class="form-control" name="q" data-action="search-preview#onSearchInput">
+                            <button type="submit" class="btn btn-primary">search</button>
                             <div class="search-preview" data-search-preview-target="result"></div>
                         </div>
                     </form>
