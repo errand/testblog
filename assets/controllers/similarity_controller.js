@@ -10,11 +10,24 @@ export default class extends Controller {
         url: String,
     }
 
-    static targets = ['result'];
+    static targets = ['results'];
 
-    onSearchInput(event) {
-        //console.log(event.currentTarget.value);
-        this.search(event.currentTarget.value);
+    async onSimilarityInput(event) {
+
+        let postId = document.getElementById('post_id').value;
+
+        const params = new URLSearchParams({
+            q: event.currentTarget.value,
+            post_id: postId,
+        });
+
+        const response = await fetch(`${this.urlValue}?${params.toString()}`);
+
+        //console.log(await response);
+
+        this.resultsTarget.innerHTML = '';
+
+        this.resultsTarget.innerHTML = await response.text();
     }
 
     async onClick(query) {

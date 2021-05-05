@@ -4,7 +4,7 @@ import { Controller } from 'stimulus';
 export default class extends Controller {
 
     connect() {
-        console.log('connected');
+        console.log('connected submit confirm');
     }
 
     onSubmit(event) {

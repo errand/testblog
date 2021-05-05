@@ -24,7 +24,7 @@ class SimilarityExtention extends AbstractExtension
 			} else if($percent > 85 && $percent <= 95) {
 				$terms[$i] = '<span class="bg-yellow">'.$term.'</span>';
 			} else if ($percent > 95) {
-				$terms[$i] = '<span class="bg-green text-white">'.$term.'</span>';
+				$terms[$i] = '<span class="bg-success text-white">'.$term.'</span>';
 			}
 
 		}

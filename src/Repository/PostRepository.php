@@ -27,23 +27,31 @@ class PostRepository extends ServiceEntityRepository
 	public function paginatedPosts($offset)
 	{
 		$query =  $this->createQueryBuilder('p')
-								->setFirstResult(0)
-		            ->setMaxResults(self::PAGINATOR_PER_PAGE)
-			          ->setFirstResult($offset);
+            ->setFirstResult(0)
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset);
 
 		return new Paginator($query, $fetchJoinCollection = true);
 	}
 
-		public function searchByQuery(string $query)
-		{
-			return $this->createQueryBuilder('p')
-			            ->where('p.title LIKE :query')
-			            ->where('p.body LIKE :query')
-			            ->setParameter('query', '%'. $query. '%')
-			            ->orderBy('p.createdAt', 'ASC')
-			            ->getQuery()
-			            ->getResult();
-		}
+    public function searchByQuery(string $query)
+    {
+        return $this->createQueryBuilder('p')
+                    ->where('p.title LIKE :query')
+                    ->where('p.body LIKE :query')
+                    ->setParameter('query', '%'. $query. '%')
+                    ->orderBy('p.createdAt', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function getPostBody(string $post_id)
+    {
+        return $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->find($post_id)
+            ->getResult();
+    }
 
     // /**
     //  * @return Post[] Returns an array of Post objects

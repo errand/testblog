@@ -91,4 +91,20 @@ class PostController extends AbstractController
             'comment_form' => $form->createView(),
         ]));
     }
+
+    /**
+     * @Route("/posts/similarity", name="search_similarity")
+     */
+    public function searchByID(Request $request, PostRepository $postRepository)
+    {
+        $repository = $this->getDoctrine()->getRepository(Post::class);
+        $query = $request->query->get('q');
+        $postId = $request->query->get('post_id');
+        $posts = $repository->find($postId);
+
+        return new Response($this->twig->render('post/_similarityPreview.html.twig', [
+            'post' => $posts,
+            'query' => $query,
+        ]));
+    }
 }

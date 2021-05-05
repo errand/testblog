@@ -5,11 +5,19 @@
 {% endblock %}
 
 {% block body %}
-	<article class="post post-{{ post.id }} pt-4">
+	<article class="post post-{{ post.id }} pt-4" {{ stimulus_controller('similarity', {
+		url: path('search_similarity')
+	}) }}>
 		<header>
 			<h1 class="title">{{ post }}</h1>
 
-			<div class="post__meta d-flex">
+			{% if post.description %}
+				<div class="post-description py-4">
+					{{ post.description }}
+				</div>
+			{% endif %}
+
+			<div class="post__meta mb-4 d-flex justify-content-between align-items-center">
 				<div class="post__time">Posted on
 					<time datetime="{{ post.createdAt|format_datetime('full', 'full') }}">{{ post.createdAt|format_datetime('medium', 'short') }}</time>.
 				</div>
@@ -20,18 +28,20 @@
 					</div>
 				{% endif %}
 
+				<div class="highligher">
+					<form class="my-2 my-lg-0 form-inline" action="{{ path('search_similarity') }}" method="get">
+						<div class="input-group">
+							<input class="form-control" placeholder="Find a word" name="q" data-action="similarity#onSimilarityInput">
+							<input type="hidden" name="id" value="{{ post.id }}" id="post_id">
+						</div>
+					</form>
+				</div>
+
 			</div>
 		</header>
 
-
-		{% if post.description %}
-			<div class="post-description py-4">
-				{{ post.description }}
-			</div>
-		{% endif %}
-
 		{% if post.body %}
-			<div class="post-body pb-4">
+			<div class="post-body pb-4 similarity" data-similarity-target="results">
 				{{ post.body }}
 			</div>
 		{% endif %}
@@ -86,8 +96,6 @@
 				<div>Be first to comment.</div>
 			{% endif %}
 			<h4 class="mb-3">Add comment</h4>
-
-			<form {{ stimulus_controller('submit-confirm') }} data-action="submit-confirm#onSubmit"></form>
 
 			{{ form(comment_form) }}
 
