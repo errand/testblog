@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0fcd7b5-a7a9-47b2-8306-11ea0e68adea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/controllers/similarity_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers/similarity_controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Twig/SimilarityExtention.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/SimilarityExtention.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +175,7 @@
       <workItem from="1620217643942" duration="139000" />
       <workItem from="1620218083511" duration="818000" />
       <workItem from="1620224030845" duration="559000" />
-      <workItem from="1620224622768" duration="9230000" />
+      <workItem from="1620224622768" duration="9884000" />
     </task>
     <servers />
   </component>

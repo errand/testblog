@@ -1,9 +1,10 @@
 import { Controller } from 'stimulus';
+import { useDebounce  } from 'stimulus-use';
 
 export default class extends Controller {
 
     connect() {
-        console.log('similarity connected');
+        useDebounce(this);
     }
 
     static values = {
@@ -11,13 +12,18 @@ export default class extends Controller {
     }
 
     static targets = ['results'];
+    static debounces = ['highlilght'];
 
-    async onSimilarityInput(event) {
+    onSimilarityInput(event) {
+        this.highlilght(event.currentTarget.value);
+    }
+
+    async highlilght(query) {
 
         let postId = document.getElementById('post_id').value;
 
         const params = new URLSearchParams({
-            q: event.currentTarget.value,
+            q: query,
             post_id: postId,
         });
 
@@ -25,22 +31,8 @@ export default class extends Controller {
 
         //console.log(await response);
 
-        this.resultsTarget.innerHTML = '';
-
         this.resultsTarget.innerHTML = await response.text();
     }
 
-    async onClick(query) {
-        const params = new URLSearchParams({
-            q: query,
-        });
 
-        const response = await fetch(`${this.urlValue}?${params.toString()}`);
-
-        this.resultTarget.innerHTML = await response.text();
-    }
-
-    clickOutside(event) {
-        this.resultTarget.innerHTML = '';
-    }
 }

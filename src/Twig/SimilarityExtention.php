@@ -20,7 +20,7 @@ class SimilarityExtention extends AbstractExtension
 
 		foreach($terms as $i => $term) {
             foreach($words as $word){
-                similar_text($word, $term, $percent);
+                similar_text(strtolower($word), strtolower($term), $percent);
                 if($percent >= 75 && $percent <= 85) {
                     $terms[$i] = '<span class="bg-orange text-white">'.$term.'</span>';
                 } else if($percent > 85 && $percent <= 95) {
