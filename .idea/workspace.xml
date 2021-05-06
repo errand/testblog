@@ -20,16 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0fcd7b5-a7a9-47b2-8306-11ea0e68adea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/post/_similarityPreview.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/testblog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/testblog.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/controllers/similarity_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers/similarity_controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/controllers/submit-confirm_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers/submit-confirm_controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PostRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Twig/SimilarityExtention.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/SimilarityExtention.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/post/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +153,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/post" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -181,7 +175,7 @@
       <workItem from="1620217643942" duration="139000" />
       <workItem from="1620218083511" duration="818000" />
       <workItem from="1620224030845" duration="559000" />
-      <workItem from="1620224622768" duration="6700000" />
+      <workItem from="1620224622768" duration="9230000" />
     </task>
     <servers />
   </component>
@@ -200,6 +194,14 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="2540" y="380" key="FileChooserDialogImpl" timestamp="1620308701115">
+      <screen x="1920" y="134" width="1680" height="1010" />
+    </state>
+    <state x="2540" y="380" key="FileChooserDialogImpl/0.0.1920.1040/1920.134.1680.1010/-1400.122.1400.1010@1920.134.1680.1010" timestamp="1620308701115" />
+    <state x="2261" y="284" key="SettingsEditor" timestamp="1620308704159">
+      <screen x="1920" y="134" width="1680" height="1010" />
+    </state>
+    <state x="2261" y="284" key="SettingsEditor/0.0.1920.1040/1920.134.1680.1010/-1400.122.1400.1010@1920.134.1680.1010" timestamp="1620308704159" />
     <state x="2352" y="372" key="Vcs.Push.Dialog.v2" timestamp="1620233318094">
       <screen x="1920" y="134" width="1680" height="1010" />
     </state>

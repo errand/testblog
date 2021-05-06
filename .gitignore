@@ -1,4 +1,5 @@
 Nginx_1.17_vhost.conf
+.idea/
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
